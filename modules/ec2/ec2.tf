@@ -1,4 +1,4 @@
-# Create a Security Group
+# Create a Security Group allows port 80 HTTP
 resource "aws_security_group" "web_sg" {
   vpc_id = var.vpcid
   ingress {
@@ -15,6 +15,25 @@ resource "aws_security_group" "web_sg" {
   }
   tags = {
     Name = "WebSG"
+  }
+}
+#Create security group with SSH group with port 20
+resource "aws_security_group" "web_sg1" {
+  vpc_id = var.vpcid
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "WebSG1"
   }
 }
 
